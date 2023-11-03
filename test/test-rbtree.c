@@ -15,7 +15,6 @@ void test_init(void) {
   assert(t->root == NULL);
 #endif
   delete_rbtree(t);
-	printf("good init!\n");
 }
 
 // root node should have proper values and pointers
