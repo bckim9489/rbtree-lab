@@ -11,23 +11,6 @@ void rb_delete_fixup(rbtree *, node_t *);
 void postorder(rbtree *, node_t *);
 void inorder(const rbtree *, key_t *, const size_t, node_t *, size_t *);
 
-//------------------------------
-void print_tree(rbtree *t);
-void preorder_print(rbtree *t, node_t *node);
-
-void print_tree(rbtree *t){
-	preorder_print(t, t->root);
-}
-
-void preorder_print(rbtree *t, node_t *node){
-	if(node != t->nil){
-		printf("key :%d, parent: %d, left: %d, right: %d, color: %s\n", node->key, node->parent->key, node->left->key, node->right->key, node->color == 0?"RED":"BLACK");
-		preorder_print(t, node->left);
-		preorder_print(t, node->right);
-	}
-}
-//-------------------------------
-
 void postorder(rbtree *t, node_t *node){
 	if(node != t->nil){
 		postorder(t, node->left);
@@ -35,7 +18,6 @@ void postorder(rbtree *t, node_t *node){
 		free(node);
 	}
 }
-
 
 rbtree *new_rbtree(void) {
 	rbtree *p = (rbtree *)calloc(1, sizeof(rbtree));
@@ -215,6 +197,7 @@ void rb_transplant(rbtree *T, node_t *u, node_t *v){
 
 int rbtree_erase(rbtree *T, node_t *z) { //return 1 :success, 0 : not exist delete node, -1: error
 	// TODO: implement erase
+
 	node_t *y = z;
 	node_t *x;
 	color_t y_original_color = y->color;
@@ -243,18 +226,19 @@ int rbtree_erase(rbtree *T, node_t *z) { //return 1 :success, 0 : not exist dele
 		y->left->parent = y;
 		y->color = z->color;
 	}
+	free(z);
 	if(y_original_color == RBTREE_BLACK){
 		rb_delete_fixup(T,x);
 	}
-	free(z);
 
 	return 1;
 }
 
 void rb_delete_fixup(rbtree *T,node_t *x){
+	node_t *w;
 	while((x != T->root) && (x->color == RBTREE_BLACK)){
 		if(x==(x->parent->left)){
-			node_t *w = x->parent->right;
+			w = x->parent->right;
 
 			if(w->color == RBTREE_RED){
 				w->color = RBTREE_BLACK;
@@ -280,18 +264,18 @@ void rb_delete_fixup(rbtree *T,node_t *x){
 				x = T->root;
 			}
 		} else {
-			node_t *w = x->parent->left;
+			w = x->parent->left;
 			if(w->color == RBTREE_RED){
 				w->color = RBTREE_BLACK;
 				x->parent->color = RBTREE_RED;
 				right_rotate(T, x->parent);
-				x = x->parent->left;
+				w = x->parent->left;
 			}
 			if((w->right->color == RBTREE_BLACK) && (w->left->color == RBTREE_BLACK)){
 				w->color = RBTREE_RED;
 				x = x->parent;
 			} else { 
-					if(w->left->color == RBTREE_BLACK){
+				if(w->left->color == RBTREE_BLACK){
 					w->right->color = RBTREE_BLACK;
 					w->color = RBTREE_RED;
 					left_rotate(T, w);
