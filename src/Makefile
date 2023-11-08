@@ -1,15 +1,8 @@
-.PHONY: test
+.PHONY: clean
 
-CFLAGS=-I ./ -Wall -g #-DSENTINEL
+CFLAGS=-Wall -g
 
-test: test-rbtree
-	./test-rbtree
-	valgrind ./test-rbtree
-
-test-rbtree: test-rbtree.o rbtree.o
-
-rbtree.o:
-	$(MAKE) -C rbtree.o
+driver: driver.o rbtree.o
 
 clean:
-	rm -f test-rbtree *.o
+	rm -f driver *.o
