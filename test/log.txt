@@ -82,3 +82,13 @@
 [2023-11-05 07:01:34]: rbtree_insert....
 [2023-11-05 07:01:34]: rbtree_insert....
 [2023-11-05 07:01:34]: rbtree_insert....
+[2023-11-08 02:11:06]: -----Segmentation fault line-----------
+[2023-11-08 02:11:59]: -----Segmentation fault line-----------
+[2023-11-08 03:38:23]: -----Segmentation fault line-----------
+[2023-11-08 03:38:24]: -----Segmentation fault line-----------
+[2023-11-08 04:35:29]: -----Segmentation fault line-----------
+[2023-11-08 04:35:29]: -----Segmentation fault line-----------
+[2023-11-08 04:36:13]: -----Segmentation fault line-----------
+[2023-11-08 04:36:14]: -----Segmentation fault line-----------
+[2023-11-08 04:36:18]: -----Segmentation fault line-----------
+[2023-11-08 04:36:19]: -----Segmentation fault line-----------
